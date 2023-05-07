@@ -1,5 +1,5 @@
 #ifndef YOUNGNINJA_HPP
-#define YOUNGNINGA_HPP
+#define YOUNGNINJA_HPP
 
 #include <iostream>
 #include "Character.hpp"
@@ -12,8 +12,6 @@ namespace ariel
     class YoungNinja : public Ninja
     {
     private:
-        const std::string &name;
-        Point location;
 
     public:
         YoungNinja(const std::string &name, Point location);
@@ -22,7 +20,7 @@ namespace ariel
         bool slash(Character *other) override;
         int getSpeed() override;
         bool setHitPoints(int amountOfHitPoints) override;
-        void print() override;
+        string print() override;
     };
 
 }

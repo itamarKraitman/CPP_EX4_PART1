@@ -9,8 +9,8 @@ namespace ariel
     void Ninja::move(const Character *other) {return;}
     bool Ninja::slash(Character *other) {return true;}
     int Ninja::getSpeed() {return this->speed;}
-    bool Ninja::setHitPoints(int amountOfHitPoints) {}
-    void Ninja::print() {return;}
+    bool Ninja::setHitPoints(int amountOfHitPoints) {return true;}
+    string Ninja::print() {return "1";}
 
 
 }

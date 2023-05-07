@@ -19,9 +19,10 @@ namespace ariel
 
     public:
         Character(const std::string &name, Point location);
+        virtual ~Character() = default;
         bool isAlive();
         double distance(const Character &other); // by reffernce to
-        virtual void print() = 0;
+        virtual string print() = 0;
 
         string getName();
         Point getLocation();

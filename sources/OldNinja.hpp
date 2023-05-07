@@ -12,8 +12,6 @@ namespace ariel
     class OldNinja : public Ninja
     {
     private:
-        const std::string &name;
-        Point location;
 
     public:
         OldNinja(const std::string &name, Point location);
@@ -21,8 +19,8 @@ namespace ariel
         void move(const Character *other) override;
         bool slash(Character *other) override;
         int getSpeed() override;
-        bool setHitPoints(int amountOfHitPoints);
-        void print() override;
+        bool setHitPoints(int amountOfHitPoints) override;
+        string print() override;
     };
 
 }

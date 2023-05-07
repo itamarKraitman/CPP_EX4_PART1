@@ -4,7 +4,7 @@
 
 namespace ariel
 {
-    Cowboy::Cowboy(const std::string &name, Point location) : Character(name, location), name(name), location(location) 
+    Cowboy::Cowboy(const std::string &name, Point location) : Character(name, location)
     {
         this->hitPoints = 110;
     }
@@ -12,9 +12,8 @@ namespace ariel
     bool Cowboy::shoot(Character *other) { return true; }
     bool Cowboy::hasBoolets() { return true; }
     void Cowboy::reload() { return; }
-    void Cowboy::print() { return; }
+    string Cowboy::print() {return "1";}
 
-    bool Cowboy::setHitPoints(int number) {this->hitPoints = number;}
-
+    bool Cowboy::setHitPoints(int number) { return true; }
 
 }

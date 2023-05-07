@@ -12,8 +12,6 @@ namespace ariel
     class TrainedNinja : public Ninja
     {
     private:
-        const std::string &name;
-        Point location;
 
     public:
         TrainedNinja(const std::string &name, Point location);
@@ -22,7 +20,7 @@ namespace ariel
         bool slash(Character *other) override;
         int getSpeed() override;
         bool setHitPoints(int amountOfHitPoints) override;
-        void print() override;
+        string print() override;
     };
 
 }

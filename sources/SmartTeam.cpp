@@ -9,9 +9,9 @@ namespace ariel
 {
     SmartTeam::SmartTeam(Character *leader) : Team(leader) {}
     SmartTeam::~SmartTeam() {}
-    bool SmartTeam::add(const Character *newTeamMember) {}
+    bool SmartTeam::add(const Character *newTeamMember) {return true;}
     void SmartTeam::attack(Team *newTeamMember) {}
-    int SmartTeam::stillAlive() {}
-    void SmartTeam::print() {}
+    int SmartTeam::stillAlive() {return 1;}
+    string SmartTeam::print() {return "1";}
 
 } 

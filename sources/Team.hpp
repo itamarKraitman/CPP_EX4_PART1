@@ -21,7 +21,7 @@ namespace ariel
         virtual bool add(const Character *newTeamMember);
         virtual void attack(Team *newTeamMember); // not const becuase changes objects
         int stillAlive();
-        virtual void print();
+        virtual string print();
 
     };
     

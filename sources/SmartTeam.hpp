@@ -21,7 +21,7 @@ namespace ariel
         bool add(const Character *newTeamMember) override;
         void attack(Team *newTeamMember) override; // not const becuase changes objects
         int stillAlive();
-        void print() override;
+        string print() override;
 
     };
     

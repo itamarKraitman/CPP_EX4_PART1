@@ -11,8 +11,6 @@ namespace ariel
     class Cowboy : public Character
     {
     private:
-        const std::string &name;
-        Point location;
         int amountOfBullets = 6;
 
     public:
@@ -21,7 +19,7 @@ namespace ariel
         bool shoot(Character *other); // returns true if hit
         bool hasBoolets();
         void reload();
-        void print() override; // "override" only inside .hpp
+        string print() override; // "override" only inside .hpp
 
         bool setHitPoints(int number);
 

@@ -5,7 +5,7 @@
 
 namespace ariel
 {
-    OldNinja::OldNinja(const std::string &name, Point location) : Ninja(name, location), name(name), location(location)
+    OldNinja::OldNinja(const std::string &name, Point location) : Ninja(name, location)
     {
         this->hitPoints = 180;
         this->speed = 8;
@@ -15,5 +15,5 @@ namespace ariel
     bool OldNinja::slash(Character *other) {return true;}
     int OldNinja::getSpeed() {return 1;}
     bool OldNinja::setHitPoints(int amountOfHitPoints) {return true;}
-    void OldNinja::print() {return;}
+    string OldNinja::print() {return "1";}
 }

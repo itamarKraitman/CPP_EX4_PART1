@@ -21,7 +21,7 @@ namespace ariel
         virtual bool slash(Character *other);
         virtual int getSpeed();
         virtual bool setHitPoints(int amountOfHitPoints);
-        void print() override;
+        string print() override;
     };
     
 }
