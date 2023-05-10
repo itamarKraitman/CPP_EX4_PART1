@@ -9,13 +9,7 @@ namespace ariel
         this->hitPoints = 110;
     }
     Cowboy::~Cowboy() {}
-    bool Cowboy::shoot(Character *other) { 
-        if (this->amountOfBullets == 0)
-        {
-            throw std::runtime_error("Cowboy has no bullets");
-        }
-        
-        return true; }
+    bool Cowboy::shoot(Character *other) { return true; }
     bool Cowboy::hasBoolets() { return true; }
     void Cowboy::reload() { return; }
     string Cowboy::print() { return "1"; }

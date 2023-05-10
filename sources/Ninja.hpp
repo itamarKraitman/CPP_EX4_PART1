@@ -24,7 +24,7 @@ namespace ariel
         int getSpeed();
         bool setHitPoints(int amountOfHitPoints);
         bool setSpeed(int newSpeed);
-        int getHitPoints(int amountOfHitPoints);
+        int getHitPoints();
     };
 
 }

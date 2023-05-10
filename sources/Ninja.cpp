@@ -16,7 +16,7 @@ namespace ariel
         this->speed = newSpeed;
         return true;
     }
-    int Ninja::getHitPoints(int amountOfHitPoints) { return this->hitPoints; }
+    int Ninja::getHitPoints() { return this->hitPoints; }
     bool Ninja::setHitPoints(int amountOfHitPoints)
     {
         this->hitPoints = amountOfHitPoints;
