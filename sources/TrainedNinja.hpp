@@ -11,6 +11,10 @@ namespace ariel
 
     class TrainedNinja : public Ninja
     {
+
+        int HITS_POINTS = 120;
+        int SPEED = 12;
+
     private:
 
     public:
@@ -18,8 +22,6 @@ namespace ariel
         ~TrainedNinja();
         void move(const Character *other) override;
         bool slash(Character *other) override;
-        int getSpeed() override;
-        bool setHitPoints(int amountOfHitPoints) override;
         string print() override;
     };
 

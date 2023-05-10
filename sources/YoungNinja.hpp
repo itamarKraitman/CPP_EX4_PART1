@@ -11,15 +11,16 @@ namespace ariel
 
     class YoungNinja : public Ninja
     {
-    private:
 
+        int HITS_POINTS = 100;
+         int SPEED = 14;
+
+    private:
     public:
         YoungNinja(const std::string &name, Point location);
         ~YoungNinja();
         void move(const Character *other) override;
         bool slash(Character *other) override;
-        int getSpeed() override;
-        bool setHitPoints(int amountOfHitPoints) override;
         string print() override;
     };
 

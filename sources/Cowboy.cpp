@@ -9,11 +9,28 @@ namespace ariel
         this->hitPoints = 110;
     }
     Cowboy::~Cowboy() {}
-    bool Cowboy::shoot(Character *other) { return true; }
+    bool Cowboy::shoot(Character *other) { 
+        if (this->amountOfBullets == 0)
+        {
+            throw std::runtime_error("Cowboy has no bullets");
+        }
+        
+        return true; }
     bool Cowboy::hasBoolets() { return true; }
     void Cowboy::reload() { return; }
-    string Cowboy::print() {return "1";}
+    string Cowboy::print() { return "1"; }
 
-    bool Cowboy::setHitPoints(int number) { return true; }
+    int Cowboy::getHitPoints() { return this->hitPoints; }
+    bool Cowboy::setHitPoints(int number)
+    {
+        this->hitPoints = number;
+        return true;
+    }
+    int Cowboy::getAmoutOfBullets() { return this->amountOfBullets; }
+    bool Cowboy::setAmountOfBullets(int number)
+    {
+        this->amountOfBullets = number;
+        return true;
+    }
 
 }

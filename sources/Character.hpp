@@ -15,7 +15,6 @@ namespace ariel
     protected:
         const std::string &name;
         Point location;
-        int hitPoints;
 
     public:
         Character(const std::string &name, Point location);
@@ -26,7 +25,6 @@ namespace ariel
 
         string getName();
         Point getLocation();
-        int getHitPoints();
     };
 
 }

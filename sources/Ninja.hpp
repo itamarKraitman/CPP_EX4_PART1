@@ -4,26 +4,29 @@
 #include <iostream>
 #include "Character.hpp"
 
-namespace ariel 
+namespace ariel
 {
     using namespace std;
 
     class Ninja : public Character
     {
-   protected:
-        const std::string &name;
-        Point location;
+    protected:
         int speed;
+        int hitPoints;
+
     public:
         Ninja(const std::string &name, Point location);
         ~Ninja();
         virtual void move(const Character *other);
         virtual bool slash(Character *other);
-        virtual int getSpeed();
-        virtual bool setHitPoints(int amountOfHitPoints);
         string print() override;
+
+        int getSpeed();
+        bool setHitPoints(int amountOfHitPoints);
+        bool setSpeed(int newSpeed);
+        int getHitPoints(int amountOfHitPoints);
     };
-    
+
 }
 
 #endif

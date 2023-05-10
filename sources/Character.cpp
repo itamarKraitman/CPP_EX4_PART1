@@ -10,5 +10,4 @@ namespace ariel
 
     string Character::getName() { return this->name; }
     Point Character::getLocation() { return this->location; }
-    int Character::getHitPoints() { return this->hitPoints; }
 }

@@ -4,13 +4,23 @@
 
 namespace ariel
 {
-    Ninja::Ninja(const std::string &name, Point location) : Character(name, location), name(name) {}
+    Ninja::Ninja(const std::string &name, Point location) : Character(name, location) {}
     Ninja::~Ninja() {}
-    void Ninja::move(const Character *other) {return;}
-    bool Ninja::slash(Character *other) {return true;}
-    int Ninja::getSpeed() {return this->speed;}
-    bool Ninja::setHitPoints(int amountOfHitPoints) {return true;}
-    string Ninja::print() {return "1";}
+    void Ninja::move(const Character *other) { return; }
+    bool Ninja::slash(Character *other) { return true; }
+    string Ninja::print() { return "1"; }
 
+    int Ninja::getSpeed() { return this->speed; }
+    bool Ninja::setSpeed(int newSpeed)
+    {
+        this->speed = newSpeed;
+        return true;
+    }
+    int Ninja::getHitPoints(int amountOfHitPoints) { return this->hitPoints; }
+    bool Ninja::setHitPoints(int amountOfHitPoints)
+    {
+        this->hitPoints = amountOfHitPoints;
+        return true;
+    }
 
 }

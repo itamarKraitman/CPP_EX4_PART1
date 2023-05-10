@@ -7,13 +7,11 @@ namespace ariel
 {
     TrainedNinja::TrainedNinja(const std::string &name, Point location) : Ninja(name, location)
     {
-        this->hitPoints = 120;
-        this->speed = 12;
+        this->hitPoints = HITS_POINTS;
+        this->speed = SPEED;
     }  
     TrainedNinja::~TrainedNinja() {}
     void TrainedNinja::move(const Character *other) {return;}
     bool TrainedNinja::slash(Character *other) {return true;}
-    int TrainedNinja::getSpeed() {return 1;}
-    bool TrainedNinja::setHitPoints(int amountOfHitPoints) {return true;}
     string TrainedNinja::print() {return "1";}
 }
