@@ -118,6 +118,10 @@ TEST_SUITE("Cowboy")
     }
     TEST_CASE("Cowboys operations")
     {
+        YoungNinja *yn = new YoungNinja("yn", Point(1, 5));
+        TrainedNinja *tn = new TrainedNinja("tn", Point(4, 5));
+        OldNinja *on = new OldNinja("on", Point(1, 6));
+
         CHECK(c1.hasboolets()); // true
         c1.shoot(c2);
         CHECK_EQ(c1.getAmoutOfBullets(), 5); // this also checks in background that setAmountOfBullets work
@@ -131,28 +135,34 @@ TEST_SUITE("Cowboy")
         CHECK_EQ(c1.getAmoutOfBullets(), 1);
         c1.shoot(c2);
         // c1 should has no bullets now
-        CHECK(!(c2->hasboolets())); // false
+        CHECK_FALSE(c2->hasboolets()); // false
         CHECK_EQ(c1.getAmoutOfBullets(), 0);
         CHECK_EQ(c2->getHitPoints(), 50); // each shoot reduce 10 hit points
         CHECK_THROWS_AS(c1.shoot(c2), std::runtime_error);
         c1.reload();
+        CHECK(c1.hasboolets());
         CHECK_EQ(c1.getAmoutOfBullets(), 6); // now should have 6 bullets
 
         SUBCASE("Cowboy can hit Ninja")
         {
-            YoungNinja *yn = new YoungNinja("yn", Point(1, 5));
-            TrainedNinja *tn = new TrainedNinja("tn", Point(4, 5));
-            OldNinja *on = new OldNinja("on", Point(1, 6));
+
             CHECK_NOTHROW(c1.shoot(yn));
             CHECK_NOTHROW(c1.shoot(tn));
             CHECK_NOTHROW(c1.shoot(on));
         }
-        SUBCASE("print dead")
+        SUBCASE("dead")
         {
             for (size_t i = 0; i < 5; i++)
             {
                 c1.shoot(c2);
             } // now c2 should be dead
+
+            // hit dead
+            CHECK_THROWS_AS(c1.shoot(c2), std::runtime_error);
+            CHECK_THROWS_AS(yn->slash(c2), std::runtime_error);
+            CHECK_THROWS_AS(yn->slash(nullptr), std::invalid_argument);
+            // by dead
+            CHECK_THROWS_AS(c2->shoot(yn), std::runtime_error);
 
             stringstream ss;
             string c2Str = c2->print();
@@ -294,12 +304,22 @@ TEST_SUITE("Team")
         CHECK_NOTHROW(team.add(yn));
         CHECK_NOTHROW(team.add(c2));
         CHECK_NOTHROW(team.add(on));
-        CHECK_EQ(team.getSize(), 3);
+        CHECK_EQ(team.getSize(), 4);
 
         CHECK(team.getSquad().at(0)->getName() == c1->getName());
         CHECK(team.getSquad().at(1)->getName() == c2->getName());
         CHECK(team.getSquad().at(2)->getName() == yn->getName());
         CHECK(team.getSquad().at(3)->getName() == on->getName());
+
+        SUBCASE("Team can have 10 members at last")
+        {
+            team.add(new Cowboy("ont", Point(11, 6.85)));
+            team.add(new Cowboy("onty", Point(11, 6.86)));
+            team.add(new Cowboy("ontj", Point(11, 6.857)));
+            team.add(new Cowboy("ontp", Point(11, 6.858)));
+            team.add(new Cowboy("ontw", Point(11, 6.856)));
+            CHECK_THROWS_AS(team.add(new Cowboy("onte", Point(11, 6.852))), std::runtime_error);
+        }
     }
 
     TEST_CASE("add duplicated member")
@@ -321,7 +341,7 @@ TEST_SUITE("Team")
         CHECK_NOTHROW(team1.attack(&team2));
         CHECK(tn1->getHitPoints() < 120);
 
-        yn->setHitPoints(100); // should be dead now
+        yn->hit(100); // should be dead now
         CHECK(team1.stillAlive() == 3);
     }
     TEST_CASE("Print")
@@ -355,7 +375,7 @@ TEST_SUITE("Team")
 
         CHECK(team.getSize() == 4);
         CHECK(team.stillAlive() == 4);
-        yn1->setHitPoints(100); // should be dead now
+        yn1->hit(100); // should be dead now
         CHECK(team.stillAlive() == 3);
 
         CHECK(team.getSquad().at(0)->getName() == yn1->getName());

@@ -21,7 +21,7 @@ namespace ariel
         Point getLocation() const;
         Point setLocation(Point other);
         int getHitPoints() const;
-        void setHitPoints(int hit);
+        void hit(int points);
         virtual string print() = 0;
 
         virtual ~Character() = default;                   // destructor

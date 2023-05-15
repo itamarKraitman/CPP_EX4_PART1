@@ -35,7 +35,7 @@ namespace ariel
         return this->hitPoints;
     }
 
-    void Character::setHitPoints(int points)
+    void Character::hit(int points)
     {
         this->hitPoints -= points;
     }

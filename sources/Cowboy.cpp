@@ -8,7 +8,7 @@ namespace ariel
 
     void Cowboy::shoot(Character *enemy)
     {
-        enemy->setHitPoints(10);
+        enemy->hit(10);
     }
 
     bool Cowboy::hasboolets()
