@@ -1,4 +1,6 @@
-#pragma once
+#ifndef NINJA_HPP
+#define NINJA_HPP
+
 #include "Character.hpp"
 
 namespace ariel
@@ -14,21 +16,6 @@ namespace ariel
         string print() override;
         int getSpeed() const;
     };
-    class OldNinja : public Ninja
-    {
-    public:
-        OldNinja(string, Point);
-    };
-
-    class YoungNinja : public Ninja
-    {
-    public:
-        YoungNinja(string, Point);
-    };
-
-    class TrainedNinja : public Ninja
-    {
-    public:
-        TrainedNinja(string, Point);
-    };
 }
+
+#endif // !NINJA_HPP

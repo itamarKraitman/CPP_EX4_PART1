@@ -79,10 +79,10 @@ TEST_SUITE("Point class")
         SUBCASE("distance between points is greater than given distance")
         {
             double distance = 5.0;
-            Point result1 = p1.moveTowards(p1);
-            Point result2 = p2.moveTowards(p2);
-            Point result3 = p3.moveTowards(p3);
-            Point result4 = p4.moveTowards(p4);
+            Point result1 = Point::moveTowards(p1, p2, distance);
+            Point result2 = Point::moveTowards(p2, p1, distance);
+            Point result3 = Point::moveTowards(p3, p2, distance);
+            Point result4 = Point::moveTowards(p4, p3, distance);
 
             CHECK(result1.distance(p2) <= distance);
             CHECK(result2.distance(p3) <= distance);
@@ -93,10 +93,10 @@ TEST_SUITE("Point class")
         SUBCASE("distance between points is less than or equal to given distance")
         {
             double distance = 15.0;
-            Point result1 = p1.moveTowards(p1);
-            Point result2 = p2.moveTowards(p2);
-            Point result3 = p3.moveTowards(p3);
-            Point result4 = p4.moveTowards(p4);
+            Point result1 = Point::moveTowards(p1, p2 ,distance);
+            Point result2 = Point::moveTowards(p2, p1 ,distance);
+            Point result3 = Point::moveTowards(p3, p2, distance);
+            Point result4 = Point::moveTowards(p4, p3, distance);
 
             CHECK(result1.distance(p2) <= distance);
             CHECK(result2.distance(p3) <= distance);
