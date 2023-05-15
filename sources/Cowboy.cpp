@@ -1,30 +1,34 @@
-#include <iostream>
-#include "Character.hpp"
 #include "Cowboy.hpp"
 
 namespace ariel
 {
-    Cowboy::Cowboy(const std::string &name, Point location) : Character(name, location)
+    Cowboy::Cowboy(string name, Point location) : Character(name, location, 110), bullets(6)
     {
-        this->hitPoints = 110;
     }
-    Cowboy::~Cowboy() {}
-    bool Cowboy::shoot(Character *other) { return true; }
-    bool Cowboy::hasBoolets() { return true; }
-    void Cowboy::reload() { return; }
-    string Cowboy::print() { return "1"; }
 
-    int Cowboy::getHitPoints() { return this->hitPoints; }
-    bool Cowboy::setHitPoints(int number)
+    void Cowboy::shoot(Character *enemy)
     {
-        this->hitPoints = number;
-        return true;
+        enemy->setHitPoints(10);
     }
-    int Cowboy::getAmoutOfBullets() { return this->amountOfBullets; }
-    bool Cowboy::setAmountOfBullets(int number)
+
+    bool Cowboy::hasboolets()
     {
-        this->amountOfBullets = number;
-        return true;
+        return false;
+    }
+
+    void Cowboy::reload()
+    {
+        this->bullets = 6;
+    }
+
+    string Cowboy::print()
+    {
+        return "";
+    }
+
+    int Cowboy::getAmoutOfBullets() const
+    {
+        return this->bullets;
     }
 
 }

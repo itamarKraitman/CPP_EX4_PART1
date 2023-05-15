@@ -1,17 +1,45 @@
-#include <iostream>
-#include <vector>
-#include "Team.hpp"
 #include "SmartTeam.hpp"
-#include "Character.hpp"
-#include "Ninja.hpp"
 
 namespace ariel
 {
-    SmartTeam::SmartTeam(Character *leader) : Team(leader) {}
-    SmartTeam::~SmartTeam() {}
-    bool SmartTeam::add(const Character *newTeamMember) {return true;}
-    void SmartTeam::attack(Team *newTeamMember) {}
-    int SmartTeam::stillAlive() {return 1;}
-    string SmartTeam::print() {return "1";}
+    SmartTeam::SmartTeam(Character *leader) : teamInterface(leader)
+    {
+        add(leader);
+    }
 
-} 
+    void SmartTeam::add(Character *character)
+    {
+        return;
+    }
+
+    void SmartTeam::attack(teamInterface *enemy)
+    {
+        return;
+    }
+
+    int SmartTeam::stillAlive()
+    {
+        return this->squad.size();
+    }
+
+    void SmartTeam::print()
+    {
+        return;
+    }
+
+    vector<Character *> SmartTeam::getEnemy(SmartTeam *enemy)
+    {
+        return enemy->squad;
+    }
+
+    vector<Character *> SmartTeam::getSquad()
+    {
+        return this->squad;
+    }
+
+    int SmartTeam::getSize()
+    {
+        return this->squad.size();
+    }
+
+}

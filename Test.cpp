@@ -45,7 +45,9 @@ TEST_SUITE("Point class")
         double dis34 = p3.distance(p4);
 
         CHECK_EQ(dis12, 23.071);
+        CHECK_EQ(23.071, dis12);
         CHECK_EQ(dis13, 10.012);
+        CHECK_EQ(10.012, dis13);
         CHECK_EQ(dis14, 0.707);
         CHECK_EQ(dis23, 19.558);
         CHECK_EQ(dis24, 22.389);
@@ -77,10 +79,10 @@ TEST_SUITE("Point class")
         SUBCASE("distance between points is greater than given distance")
         {
             double distance = 5.0;
-            Point result1 = p1.moveTowards(p1, p2, distance);
-            Point result2 = p2.moveTowards(p2, p3, distance);
-            Point result3 = p3.moveTowards(p3, p4, distance);
-            Point result4 = p4.moveTowards(p4, p1, distance);
+            Point result1 = p1.moveTowards(p1);
+            Point result2 = p2.moveTowards(p2);
+            Point result3 = p3.moveTowards(p3);
+            Point result4 = p4.moveTowards(p4);
 
             CHECK(result1.distance(p2) <= distance);
             CHECK(result2.distance(p3) <= distance);
@@ -91,10 +93,10 @@ TEST_SUITE("Point class")
         SUBCASE("distance between points is less than or equal to given distance")
         {
             double distance = 15.0;
-            Point result1 = p1.moveTowards(p1, p2, distance);
-            Point result2 = p2.moveTowards(p2, p3, distance);
-            Point result3 = p3.moveTowards(p3, p4, distance);
-            Point result4 = p4.moveTowards(p4, p1, distance);
+            Point result1 = p1.moveTowards(p1);
+            Point result2 = p2.moveTowards(p2);
+            Point result3 = p3.moveTowards(p3);
+            Point result4 = p4.moveTowards(p4);
 
             CHECK(result1.distance(p2) <= distance);
             CHECK(result2.distance(p3) <= distance);
@@ -106,18 +108,17 @@ TEST_SUITE("Point class")
 
 TEST_SUITE("Cowboy")
 {
-    Cowboy c1 = Cowboy("Mi", Point(2, 5));
+    Cowboy c1("Mi", Point(2, 5));
     Cowboy *c2 = new Cowboy("Gh", Point(3, 5)); // opponet
 
     TEST_CASE("Constructor")
     {
-        Cowboy c1 = Cowboy("Mi", Point(2, 5));
         CHECK_EQ(c1.getAmoutOfBullets(), 6);
         CHECK_EQ(c1.getHitPoints(), 110);
     }
     TEST_CASE("Cowboys operations")
     {
-        CHECK(c1.hasBoolets()); // true
+        CHECK(c1.hasboolets()); // true
         c1.shoot(c2);
         CHECK_EQ(c1.getAmoutOfBullets(), 5); // this also checks in background that setAmountOfBullets work
         c1.shoot(c2);
@@ -130,6 +131,7 @@ TEST_SUITE("Cowboy")
         CHECK_EQ(c1.getAmoutOfBullets(), 1);
         c1.shoot(c2);
         // c1 should has no bullets now
+        CHECK(!(c2->hasboolets())); // false
         CHECK_EQ(c1.getAmoutOfBullets(), 0);
         CHECK_EQ(c2->getHitPoints(), 50); // each shoot reduce 10 hit points
         CHECK_THROWS_AS(c1.shoot(c2), std::runtime_error);
@@ -153,25 +155,17 @@ TEST_SUITE("Cowboy")
             } // now c2 should be dead
 
             stringstream ss;
-            ostringstream actuallStr;
-            streambuf *printed = cout.rdbuf();
-            cout.rdbuf(ss.rdbuf());
-            c2->print();
-            cout.rdbuf(printed);
-            actuallStr << "C (" << c2->getName() << ")" << endl;
-            CHECK(ss.str() == actuallStr.str());
+            string c2Str = c2->print();
+            ss << "C (" << c2->getName() << ") died" << endl;
+            CHECK(ss.str() == c2Str);
         }
     }
     TEST_CASE("print alive")
     {
         stringstream ss;
-        ostringstream actuallStr;
-        streambuf *printed = cout.rdbuf();
-        cout.rdbuf(ss.rdbuf());
-        c2->print();
-        cout.rdbuf(printed);
-        actuallStr << "C (" << c2->getName() << "), Hit Points: " << c2->getHitPoints() << endl;
-        CHECK(ss.str() == actuallStr.str());
+        string c2Str = c2->print();
+        ss << "C (" << c2->getName() << ") Hit Points" << c2->getHitPoints() << endl;
+        CHECK(ss.str() == c2Str);
     }
 }
 
@@ -262,7 +256,7 @@ TEST_SUITE("Ninja")
             CHECK_NOTHROW(yn1->slash(enemy));
             CHECK_EQ(enemy->getHitPoints(), 60); // slash reduce 40 hit points
             yn1->slash(c1);                      // should not make any damage
-            CHECK_EQ(c1->getHitPoints(), 110);   // slash reduce 40 hit points
+            CHECK_EQ(c1->getHitPoints(), 110);
         }
     }
 
@@ -276,5 +270,106 @@ TEST_SUITE("Ninja")
         cout.rdbuf(printed);
         actuallStr << "N (" << yn->getName() << "), Hit Points: " << yn->getHitPoints() << endl;
         CHECK(ss.str() == actuallStr.str());
+    }
+}
+
+TEST_SUITE("Team")
+{
+    YoungNinja *yn = new YoungNinja("yn", Point(1, 5));
+    TrainedNinja *tn = new TrainedNinja("tn", Point(4.55, 5));
+    OldNinja *on = new OldNinja("on", Point(1, 6.85));
+    Cowboy *c1 = new Cowboy("CA", Point{1, 2});
+    Cowboy *c2 = new Cowboy("CB", Point{55.548, 28.879});
+    YoungNinja *yn1 = new YoungNinja("YN1", Point{17.765, 29});
+    OldNinja *on1 = new OldNinja("ON1", Point{26.31, 5.4});
+    TrainedNinja *tn1 = new TrainedNinja("TN1", Point{16.52, 60.546});
+
+    TEST_CASE("Constructor")
+    {
+        CHECK_NOTHROW(Team team(c1));
+    }
+    TEST_CASE("add member")
+    {
+        Team team(c1);
+        CHECK_NOTHROW(team.add(yn));
+        CHECK_NOTHROW(team.add(c2));
+        CHECK_NOTHROW(team.add(on));
+        CHECK_EQ(team.getSize(), 3);
+
+        CHECK(team.getSquad().at(0)->getName() == c1->getName());
+        CHECK(team.getSquad().at(1)->getName() == c2->getName());
+        CHECK(team.getSquad().at(2)->getName() == yn->getName());
+        CHECK(team.getSquad().at(3)->getName() == on->getName());
+    }
+
+    TEST_CASE("add duplicated member")
+    {
+        Team team(c1);
+        CHECK_NOTHROW(team.add(yn));
+        CHECK_THROWS(team.add(yn));
+    }
+    TEST_CASE("attack")
+    {
+        Team team1(c1); // leader c1
+        team1.add(yn);
+        team1.add(c2);
+        team1.add(yn1);
+
+        Team team2(tn1); // leader c1
+        team2.add(on1);
+
+        CHECK_NOTHROW(team1.attack(&team2));
+        CHECK(tn1->getHitPoints() < 120);
+
+        yn->setHitPoints(100); // should be dead now
+        CHECK(team1.stillAlive() == 3);
+    }
+    TEST_CASE("Print")
+    {
+        Team team1(c1); // leader c1
+        team1.add(yn);
+        team1.add(c2);
+        team1.add(yn1);
+        CHECK(team1.getSize() == 4);
+
+        string teamString;
+        CHECK_NOTHROW(team1.print());
+        std::stringstream ss;
+        std::streambuf *prev_cout_buf = std::cout.rdbuf(ss.rdbuf()); // redirect cout to ss
+        team1.print();
+        std::cout.rdbuf(prev_cout_buf); // restore cout's original buffer
+        std::string expected_output = "Team team1: Leader: Cowboy" + c1->getName() + "\n2. cowbouy " + c2->getName() + "\n3. ninja " + yn->getName() + "\n4. ninja: " + yn1->getName();
+        CHECK(ss.str() == expected_output);
+    }
+    TEST_CASE("Team2")
+    {
+        SUBCASE("constructor")
+        {
+            CHECK_NOTHROW(Team2 team1(c1)); // leader c1
+        }
+
+        Team2 team(yn1);
+        team.add(yn);
+        team.add(c1);
+        team.add(tn);
+
+        CHECK(team.getSize() == 4);
+        CHECK(team.stillAlive() == 4);
+        yn1->setHitPoints(100); // should be dead now
+        CHECK(team.stillAlive() == 3);
+
+        CHECK(team.getSquad().at(0)->getName() == yn1->getName());
+        CHECK(team.getSquad().at(1)->getName() == yn->getName());
+        CHECK(team.getSquad().at(2)->getName() == c1->getName());
+        CHECK(team.getSquad().at(3)->getName() == tn->getName());
+
+        string teamString;
+        CHECK_NOTHROW(team.print());
+        std::stringstream ss;
+        std::streambuf *prev_cout_buf = std::cout.rdbuf(ss.rdbuf()); // redirect cout to ss
+        team.print();
+        std::cout.rdbuf(prev_cout_buf); // restore cout's original buffer
+        std::string expected_output = "Team team: Leader: ninja" + yn1->getName() + "\n2. ninja " + yn->getName() + "\n3. cowboy " + c1->getName() + "\n4. ninja: " + tn->getName();
+        CHECK(ss.str() == expected_output);
     }
 }

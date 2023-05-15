@@ -1,13 +1,43 @@
-#include <iostream>
 #include "Character.hpp"
-
 namespace ariel
 {
-    Character::Character(const std::string &name, Point location) : name(name), location(location) {}
-    bool Character::isAlive() { return true; }
-    double Character::distance(const Character &other) { return 1; } // by reffernce to
-    string Character::print() { return "1"; }
+    Character::Character() {}
+    Character::Character(string name, Point location, int hitPoints) : name(name), location(location), hitPoints(hitPoints) {}
 
-    string Character::getName() { return this->name; }
-    Point Character::getLocation() { return this->location; }
+    bool Character::isAlive() const
+    {
+        return true;
+    }
+
+    double Character::distance(Character *other)
+    {
+        return this->location.distance(other->location);
+    }
+
+    string Character::getName() const
+    {
+        return this->name;
+    }
+
+    Point Character::getLocation() const
+    {
+        return this->location;
+    }
+
+    Point Character::setLocation(Point other)
+    {
+        this->location = other;
+        return location;
+    }
+
+    int Character::getHitPoints() const
+    {
+        return this->hitPoints;
+    }
+
+    void Character::setHitPoints(int points)
+    {
+        this->hitPoints -= points;
+    }
+
 }

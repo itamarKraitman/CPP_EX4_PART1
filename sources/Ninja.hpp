@@ -1,32 +1,34 @@
-#ifndef NINJA_HPP
-#define NINJA_HPP
-
-#include <iostream>
+#pragma once
 #include "Character.hpp"
 
 namespace ariel
 {
-    using namespace std;
-
     class Ninja : public Character
     {
-    protected:
         int speed;
-        int hitPoints;
 
     public:
-        Ninja(const std::string &name, Point location);
-        ~Ninja();
+        Ninja(string, Point, int, int);
         virtual void move(const Character *other);
         virtual bool slash(Character *other);
         string print() override;
-
-        int getSpeed();
-        bool setHitPoints(int amountOfHitPoints);
-        bool setSpeed(int newSpeed);
-        int getHitPoints();
+        int getSpeed() const;
+    };
+    class OldNinja : public Ninja
+    {
+    public:
+        OldNinja(string, Point);
     };
 
-}
+    class YoungNinja : public Ninja
+    {
+    public:
+        YoungNinja(string, Point);
+    };
 
-#endif
+    class TrainedNinja : public Ninja
+    {
+    public:
+        TrainedNinja(string, Point);
+    };
+}

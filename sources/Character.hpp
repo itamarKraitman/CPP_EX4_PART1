@@ -1,32 +1,34 @@
-#ifndef CHARACTER_HPP
-#define CHARACTER_HPP
-
-#include <iostream>
-#include <string>
+#pragma once
 #include "Point.hpp"
+#include <string>
+using namespace std;
 
 namespace ariel
 {
-    using namespace std;
-
-    // abstract class to repesent Cowbys and Ninjas
     class Character
     {
-    protected:
-        const std::string &name;
         Point location;
+        int hitPoints;
+        string name;
 
     public:
-        Character(const std::string &name, Point location);
-        virtual ~Character() = default;
-        bool isAlive();
-        double distance(const Character &other); // by reffernce to
+        Character();
+        Character(string, Point, int);
+
+        bool isAlive() const;
+        double distance(Character *);
+        string getName() const;
+        Point getLocation() const;
+        Point setLocation(Point other);
+        int getHitPoints() const;
+        void setHitPoints(int hit);
         virtual string print() = 0;
 
-        string getName();
-        Point getLocation();
+        virtual ~Character() = default;                   // destructor
+        Character(const Character &) = delete;            // Copy constructor
+        Character &operator=(const Character &) = delete; // Copy assignment operator
+        Character(Character &&) = delete;                 // Move constructor
+        Character &operator=(Character &&) = delete;      // Move assignment operator
     };
 
 }
-
-#endif

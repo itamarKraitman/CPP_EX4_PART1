@@ -1,26 +1,40 @@
-#include <iostream>
-#include "Character.hpp"
 #include "Ninja.hpp"
 
 namespace ariel
 {
-    Ninja::Ninja(const std::string &name, Point location) : Character(name, location) {}
-    Ninja::~Ninja() {}
-    void Ninja::move(const Character *other) { return; }
-    bool Ninja::slash(Character *other) { return true; }
-    string Ninja::print() { return "1"; }
-
-    int Ninja::getSpeed() { return this->speed; }
-    bool Ninja::setSpeed(int newSpeed)
+    Ninja::Ninja(string name, Point location, int hitPoints, int speed) : Character(name, location, hitPoints), speed(speed)
     {
-        this->speed = newSpeed;
+    }
+
+    void Ninja::move(const Character *enemy)
+    {
+    }
+
+    bool Ninja::slash(Character *enemy)
+    {
         return true;
     }
-    int Ninja::getHitPoints() { return this->hitPoints; }
-    bool Ninja::setHitPoints(int amountOfHitPoints)
+
+    string Ninja::print()
     {
-        this->hitPoints = amountOfHitPoints;
-        return true;
+        return "";
+    }
+
+    int Ninja::getSpeed() const
+    {
+        return this->speed;
+    }
+
+    OldNinja::OldNinja(string name, Point location) : Ninja(name, location, 150, 8)
+    {
+    }
+
+    YoungNinja::YoungNinja(string name, Point location) : Ninja(name, location, 100, 14)
+    {
+    }
+
+    TrainedNinja::TrainedNinja(string name, Point location) : Ninja(name, location, 120, 12)
+    {
     }
 
 }
